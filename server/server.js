@@ -10,10 +10,13 @@ import imageRoute from "./routes/imageRoute.js";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-const corsOptions = {
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://imagger-ai-image-generator.vercel.app"
+  ],
   credentials: true
-};
+}));
 
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
