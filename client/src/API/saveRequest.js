@@ -1,7 +1,7 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/image";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export const saveImg = async (data, token) => {
-  const response = await fetch(`${BASE_URL}/save`, {
+  const response = await fetch(`${BASE_URL}/api/image/save`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const saveImg = async (data, token) => {
 };
 
 export const getImg = async (token) => {
-  const response = await fetch(`${BASE_URL}/`, {
+  const response = await fetch(`${BASE_URL}/api/image/`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export const getImg = async (token) => {
 };
 
 export const deleteImg = async (imageId, token) => {
-  const response = await fetch(`${BASE_URL}/delete/${imageId}`, {
+  const response = await fetch(`${BASE_URL}/api/image/delete/${imageId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
