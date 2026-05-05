@@ -18,12 +18,14 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
 
 
 //Routes
+app.get("/", (req, res) => {
+  res.json({ status: "Server is running" });
+});
 app.use("/api/generate", generateRoute);
 app.use("/api/auth", userRoute);
 app.use("/api/image", imageRoute);
