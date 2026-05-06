@@ -95,7 +95,7 @@ Create a `.env` file inside the server folder and add the following:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-HF_API_KEY=your_huggingface_api_key
+AI_API=your_ai_api_key
 ```
 
 Create a `.env` file inside the client folder:
@@ -223,7 +223,7 @@ Add environment variables:
 ```env
 MONGO_URI=your_mongodb_url
 JWT_SECRET=your_secret
-HF_API_KEY=your_api_key
+AI_API=your_ai_api_key
 ```
 
 ---
