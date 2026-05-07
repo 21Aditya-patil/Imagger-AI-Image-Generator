@@ -26,6 +26,9 @@ app.use(express.urlencoded({ limit: '50mb' }));
 app.get("/", (req, res) => {
   res.json({ status: "Server is running" });
 });
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
 app.use("/api/generate", generateRoute);
 app.use("/api/auth", userRoute);
 app.use("/api/image", imageRoute);
