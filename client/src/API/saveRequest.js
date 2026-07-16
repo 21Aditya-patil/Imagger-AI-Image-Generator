@@ -1,7 +1,7 @@
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { apiUrl, readErrorMessage } from "./config";
 
 export const saveImg = async (data, token) => {
-  const response = await fetch(`${BASE_URL}/api/image/save`, {
+  const response = await fetch(apiUrl("/api/image/save"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,15 +11,14 @@ export const saveImg = async (data, token) => {
   });
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Save failed: ${response.status} - ${error}`);
+    throw new Error(await readErrorMessage(response, `Save failed: ${response.status}`));
   }
 
   return response.json()
 };
 
 export const getImg = async (token) => {
-  const response = await fetch(`${BASE_URL}/api/image/`, {
+  const response = await fetch(apiUrl("/api/image/"), {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -28,15 +27,14 @@ export const getImg = async (token) => {
   });
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Get failed: ${response.status} - ${error}`);
+    throw new Error(await readErrorMessage(response, `Get failed: ${response.status}`));
   }
 
   return response.json()
 };
 
 export const deleteImg = async (imageId, token) => {
-  const response = await fetch(`${BASE_URL}/api/image/delete/${imageId}`, {
+  const response = await fetch(apiUrl(`/api/image/delete/${imageId}`), {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -45,8 +43,7 @@ export const deleteImg = async (imageId, token) => {
   });
 
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Delete failed: ${response.status} - ${error}`);
+    throw new Error(await readErrorMessage(response, `Delete failed: ${response.status}`));
   }
 
   return response.json()

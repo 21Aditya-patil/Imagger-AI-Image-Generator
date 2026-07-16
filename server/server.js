@@ -9,12 +9,18 @@ import imageRoute from "./routes/imageRoute.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+const MONGO_URI = process.env.MONGO_DB || process.env.MONGO_URI;
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://imagger-ai-image-generator.vercel.app",
+  ...(process.env.CLIENT_URLS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+];
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://imagger-ai-image-generator.vercel.app"
-  ],
+  origin: allowedOrigins,
   credentials: true
 }));
 
@@ -35,8 +41,18 @@ app.use("/api/image", imageRoute);
 
 
 // DATABASE Connection
+if (!MONGO_URI) {
+  console.error("Missing MongoDB connection string. Set MONGO_DB or MONGO_URI.");
+  process.exit(1);
+}
+
+if (!process.env.JWT_SECRET) {
+  console.error("Missing JWT_SECRET. Authentication cannot issue or verify tokens.");
+  process.exit(1);
+}
+
 mongoose
-  .connect(process.env.MONGO_DB)
+  .connect(MONGO_URI)
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server running on ${PORT}`);

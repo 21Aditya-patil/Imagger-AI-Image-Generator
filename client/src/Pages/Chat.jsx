@@ -9,7 +9,7 @@ function Chat() {
   const dispatch = useDispatch();
   const { image, loading } = useSelector((state) => state.image);
   const { token } = useSelector((state) => state.auth);
-  const { loading: saveLoading, error: saveError } = useSelector((state) => state.save);
+  const { loading: saveLoading } = useSelector((state) => state.save);
 
   const [prompt, setPrompt] = useState("");
   const [style, setStyle] = useState("anime");

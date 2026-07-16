@@ -48,7 +48,10 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.token = null;
+      state.userID = null;
+      state.error = null;
       localStorage.removeItem("token");
+      localStorage.removeItem("pendingVerificationUserID");
     }
   },
   extraReducers: (builder) => {
@@ -56,40 +59,57 @@ const authSlice = createSlice({
 
       // REGISTER
       .addCase(register.pending, (state) => {
+        state.loading = true;
         state.error = null;
       })
       .addCase(register.fulfilled, (state, action) => {
+        state.loading = false;
         state.userID = action.payload.userID;
         state.error = null;
+        localStorage.setItem("pendingVerificationUserID", action.payload.userID);
       })
       .addCase(register.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload || "Registration failed";
       })
 
       // VERIFY
       .addCase(verify.pending, (state) => {
+        state.loading = true;
         state.error = null;
       })
       .addCase(verify.fulfilled, (state, action) => {
+        state.loading = false;
         state.token = action.payload.token;
         state.userID = null;
         state.error = null;
         localStorage.setItem("token", action.payload.token);
+        localStorage.removeItem("pendingVerificationUserID");
       })
       .addCase(verify.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload || "OTP verification failed";
       })
 
       // LOGIN
       .addCase(login.pending, (state) => {
+        state.loading = true;
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.token = action.payload.token;
+        state.loading = false;
         state.error = null;
-        localStorage.setItem("token", action.payload.token);
+        if (action.payload.token) {
+          state.token = action.payload.token;
+          state.userID = null;
+          localStorage.setItem("token", action.payload.token);
+        } else if (action.payload.userID) {
+          state.userID = action.payload.userID;
+          localStorage.setItem("pendingVerificationUserID", action.payload.userID);
+        }
       })
       .addCase(login.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload || "Login failed";
       });
   }

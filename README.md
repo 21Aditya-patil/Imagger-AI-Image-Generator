@@ -95,13 +95,15 @@ Create a `.env` file inside the server folder and add the following:
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
+EMAIL=your_gmail_address
+EMAIL_PASS=your_gmail_app_password
 AI_API=your_ai_api_key
 ```
 
 Create a `.env` file inside the client folder:
 
 ```env
-VITE_API_URL=http://localhost:5000/api
+VITE_API_URL=http://localhost:8000
 ```
 
 ---
@@ -206,7 +208,7 @@ Deploy the frontend on:
 Add environment variable:
 
 ```env
-VITE_API_URL=your_backend_url/api
+VITE_API_URL=your_backend_url
 ```
 
 ---
@@ -223,7 +225,10 @@ Add environment variables:
 ```env
 MONGO_URI=your_mongodb_url
 JWT_SECRET=your_secret
+EMAIL=your_gmail_address
+EMAIL_PASS=your_gmail_app_password
 AI_API=your_ai_api_key
+CLIENT_URLS=https://your-frontend-domain.com
 ```
 
 ---

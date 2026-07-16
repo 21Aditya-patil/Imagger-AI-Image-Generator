@@ -28,7 +28,7 @@ export const generateFromAI = async (prompt, style) => {
   );
 
   if (!response.ok) {
-    const text = await response.text();
+    const text = await response.text(); 
     throw new Error(`Generation failed: ${text}`);
   }
 

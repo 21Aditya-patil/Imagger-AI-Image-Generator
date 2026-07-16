@@ -1,8 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import { apiUrl, readErrorMessage } from "./config";
 
 export const generateImage = async (data) => {
   const token = localStorage.getItem("token");  
-  const res = await fetch(`${API_URL}/api/generate`, {
+  const res = await fetch(apiUrl("/api/generate"), {
     method: "POST",
     headers: { 
       "Content-Type": "application/json",
@@ -13,8 +13,7 @@ export const generateImage = async (data) => {
   });
 
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error(`API error: ${res.status} - ${error}`);
+    throw new Error(await readErrorMessage(res, `API error: ${res.status}`));
   }
 
   const result = await res.json();

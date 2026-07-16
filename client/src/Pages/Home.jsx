@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import Nav from "../components/Nav";
 import { useNavigate } from "react-router-dom";
 
@@ -78,7 +78,7 @@ function Home() {
         <div className="absolute bottom-[5%] -right-[5%] w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] lg:w-[400px] lg:h-[400px] rounded-full bg-[rgba(99,102,241,0.08)] blur-[80px] pointer-events-none" />
 
         {/* Badge */}
-        <motion.div
+        <Motion.div
           className="inline-flex items-center gap-2 bg-[rgba(0,229,255,0.1)] border border-[rgba(0,229,255,0.25)] rounded-full px-4 py-1.5 text-[#00e5ff] text-xs tracking-wide mb-7"
           variants={fadeUp}
           initial="hidden"
@@ -87,10 +87,10 @@ function Home() {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#00e5ff] animate-pulse" />
           Powered by AI · Free to start
-        </motion.div>
+        </Motion.div>
 
         {/* Headline */}
-        <motion.h1
+        <Motion.h1
           className="font-extrabold leading-none tracking-tighter mb-6"
           style={{
             fontFamily: "'Syne', sans-serif",
@@ -104,10 +104,10 @@ function Home() {
           Image
           <br />
           <span className="text-[#00e5ff]">Generation</span>
-        </motion.h1>
+        </Motion.h1>
 
         {/* Subtitle */}
-        <motion.p
+        <Motion.p
           className="text-[#7a8aaa] text-base sm:text-lg font-light leading-relaxed max-w-xl mb-8 sm:mb-11 px-2"
           variants={fadeUp}
           initial="hidden"
@@ -116,17 +116,17 @@ function Home() {
         >
           Transform your words into stunning visuals in seconds. Create,
           explore, and bring your imagination to life with next-gen AI.
-        </motion.p>
+        </Motion.p>
 
         {/* CTA Buttons */}
-        <motion.div
+        <Motion.div
           className="flex flex-wrap gap-4 justify-center"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.55 }}
         >
-          <motion.button
+          <Motion.button
             onClick={handleGenBtn}
             className="bg-[#00e5ff] text-[#070b14] font-bold px-8 py-3.5 rounded-xl text-sm shadow-[0_0_30px_rgba(0,229,255,0.35)] cursor-pointer border-0"
             style={{ fontFamily: "'Syne', sans-serif" }}
@@ -134,18 +134,18 @@ function Home() {
             whileTap={{ scale: 0.97 }}
           >
             Start Generating →
-          </motion.button>
-          <motion.button
+          </Motion.button>
+          <Motion.button
             onClick={handleHistBtn}
             className="bg-transparent border border-white/10 text-[#f0f4ff] px-8 py-3.5 rounded-xl text-sm cursor-pointer"
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.97 }}
           >
             View Gallery
-          </motion.button>
-        </motion.div>
+          </Motion.button>
+        </Motion.div>
 
-        <motion.div
+        <Motion.div
           className="relative w-full mt-20 overflow-hidden"
           variants={fadeUp}
           initial="hidden"
@@ -157,7 +157,7 @@ function Home() {
           {/* Right fade edge */}
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#070b14] to-transparent z-10 pointer-events-none" />
 
-          <motion.div
+          <Motion.div
             className="flex gap-3 w-max"
             animate={{ x: "-50%" }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
@@ -171,8 +171,8 @@ function Home() {
                 {badge.text}
               </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </Motion.div>
+        </Motion.div>
       </section>
 
       {/* ── FEATURES ── */}
@@ -194,7 +194,7 @@ function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((f, i) => (
-            <motion.div
+            <Motion.div
               key={i}
               className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-5 sm:p-7 lg:p-9 cursor-default"
               initial={{ opacity: 0, y: 30 }}
@@ -215,7 +215,7 @@ function Home() {
               <p className="text-[#7a8aaa] text-sm leading-relaxed font-light">
                 {f.desc}
               </p>
-            </motion.div>
+            </Motion.div>
           ))}
         </div>
       </section>
@@ -233,7 +233,7 @@ function Home() {
         <p className="text-[#7a8aaa] font-light text-base max-w-md">
           Join thousands of creators already using Imagger every day.
         </p>
-        <motion.button
+        <Motion.button
           onClick={handleGenBtn}
           className="mt-2 bg-[#00e5ff] text-[#070b14] font-bold px-10 py-4 rounded-xl text-base shadow-[0_0_30px_rgba(0,229,255,0.35)] cursor-pointer border-0"
           style={{ fontFamily: "'Syne', sans-serif" }}
@@ -241,7 +241,7 @@ function Home() {
           whileTap={{ scale: 0.97 }}
         >
           Get Started Free →
-        </motion.button>
+        </Motion.button>
       </section>
     </div>
   );
